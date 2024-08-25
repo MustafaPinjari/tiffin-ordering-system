@@ -16,6 +16,7 @@ form {
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     margin: 0 auto;
+    box-sizing: border-box; /* Ensures padding and border are included in element's width and height */
 }
 
 label {
@@ -29,6 +30,7 @@ input[type="text"], input[type="number"] {
     margin-bottom: 15px;
     border-radius: 3px;
     border: 1px solid #ccc;
+    box-sizing: border-box; /* Makes input elements responsive */
 }
 
 button {
@@ -38,10 +40,11 @@ button {
     border: none;
     border-radius: 3px;
     cursor: pointer;
-    width: 300px;
+    width: 100%; /* Button width now adjusts to the form width */
     align-items: center;
     justify-content: center;
-    margin-left: 50px;
+    margin-top: 10px; /* Adjusted margin to prevent overflow */
+    box-sizing: border-box;
 }
 
 button:hover {
@@ -52,6 +55,7 @@ table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
+    box-sizing: border-box;
 }
 
 table, th, td {
@@ -69,29 +73,63 @@ tfoot td {
 
 /* Button Container */
 #downloadBtn {
-    background-color: #4CAF50; /* Green background */
-    border: none; /* Remove borders */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Reduced padding */
-    text-align: center; /* Center text */
-    text-decoration: none; /* Remove underline from text */
-    display: inline-block; /* Align with text */
-    font-size: 14px; /* Smaller text size */
-    margin: 40px 600px; /* Margin around the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 5px; /* Rounded corners */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
-  
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 40px auto; /* Centered the button */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: block; /* Ensures the button is centered */
+    box-sizing: border-box;
+    width: fit-content; /* Ensures the button does not exceed form width */
 }
 
 /* Button Hover Effect */
 #downloadBtn:hover {
-    background-color: #45a049; /* Darker green on hover */
-    transform: scale(1.03); /* Slightly smaller scale on hover */
+    background-color: #45a049;
+    transform: scale(1.03);
 }
 
 /* Button Focus Effect */
 #downloadBtn:focus {
-    outline: none; /* Remove outline */
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2); /* Add shadow on focus */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+    form {
+        padding: 30px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+    }
+    #downloadBtn {
+        margin: 20px auto;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    form {
+        padding: 20px;
+    }
+    button {
+        width: 100%;
+        padding: 8px;
+    }
+    #downloadBtn {
+        margin: 20px auto;
+        width: 90%;
+    }
+    input[type="text"], input[type="number"] {
+        padding: 6px;
+    }
 }
