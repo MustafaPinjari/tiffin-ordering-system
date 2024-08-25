@@ -17,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const now = new Date();
     dateField.value = now.toLocaleString();
 
+    // Load orders from localStorage
+    loadOrders();
+
     // Calculate the total amount based on the number of tiffins
     tiffinsField.addEventListener("input", () => {
         const numberOfTiffins = parseInt(tiffinsField.value) || 1;
@@ -52,9 +55,41 @@ document.addEventListener("DOMContentLoaded", () => {
         totalTiffinsCell.textContent = totalTiffins;
         grandTotalAmountCell.textContent = grandTotalAmount;
 
+        // Save order to localStorage
+        saveOrder({ date, numberOfTiffins, totalAmount });
+
         // Reset form fields
         tiffinsField.value = 1;
         totalAmountField.value = tiffinPrice;
+    }
+
+    // Function to save an order to localStorage
+    function saveOrder(order) {
+        let orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.push(order);
+        localStorage.setItem('orders', JSON.stringify(orders));
+    }
+
+    // Function to load orders from localStorage
+    function loadOrders() {
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.forEach(order => {
+            const newRow = document.createElement("tr");
+            newRow.innerHTML = `
+                <td>${order.date}</td>
+                <td>${order.numberOfTiffins}</td>
+                <td>${tiffinPrice}</td>
+                <td>${order.totalAmount}</td>
+            `;
+            orderTableBody.appendChild(newRow);
+
+            // Update totals
+            totalTiffins += order.numberOfTiffins;
+            grandTotalAmount += order.totalAmount;
+        });
+
+        totalTiffinsCell.textContent = totalTiffins;
+        grandTotalAmountCell.textContent = grandTotalAmount;
     }
 
     // Download button event listener
