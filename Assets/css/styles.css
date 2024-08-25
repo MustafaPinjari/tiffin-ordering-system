@@ -45,6 +45,7 @@ button {
     justify-content: center;
     margin-top: 10px; /* Adjusted margin to prevent overflow */
     box-sizing: border-box;
+    border-radius:10px;
 }
 
 button:hover {
